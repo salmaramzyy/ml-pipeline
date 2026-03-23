@@ -4,7 +4,7 @@ import os
 
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
-THRESHOLD = 0.85
+THRESHOLD = 0.99
 
 with open("model_info.txt", "r") as f:
     run_id = f.read().strip()
