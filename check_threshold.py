@@ -1,6 +1,8 @@
 import mlflow
 import sys
 
+mlflow.set_tracking_uri("file:./mlruns")
+
 THRESHOLD = 0.85
 
 # Read run_id
