@@ -19,7 +19,7 @@ with mlflow.start_run() as run:
     with open("model_info.txt", "w") as f:
         f.write(run_id)
 
-    model = RandomForestClassifier(n_estimators=50)
+    model = RandomForestClassifier(n_estimators=1, max_depth=1, random_state=42)
     model.fit(X_train, y_train)
 
     y_pred = model.predict(X_test)
