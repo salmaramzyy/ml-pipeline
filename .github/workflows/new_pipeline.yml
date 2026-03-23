@@ -56,14 +56,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: mlruns
-          path: .
+          path: mlruns
 
       - name: Debug files
         run: |
           echo "Model Info:"
           cat model_info.txt
-          echo "MLruns structure:"
-          ls -R mlruns
+          echo "All files:"
+          ls -R
 
       - uses: actions/setup-python@v5
         with:
