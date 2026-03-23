@@ -50,6 +50,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: mlruns
+          path: .
+
+      - name: Debug files
+        run: ls -R
 
       - uses: actions/setup-python@v5
         with:
