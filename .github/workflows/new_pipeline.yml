@@ -18,8 +18,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Clean mlruns
+        run: rm -rf mlruns
+
       - name: Train model
         run: python train.py
+
+      - name: Show mlruns structure
+        run: ls -R mlruns
 
       - name: Upload model info
         uses: actions/upload-artifact@v4
@@ -53,7 +59,11 @@ jobs:
           path: .
 
       - name: Debug files
-        run: ls -R
+        run: |
+          echo "Model Info:"
+          cat model_info.txt
+          echo "MLruns structure:"
+          ls -R mlruns
 
       - uses: actions/setup-python@v5
         with:

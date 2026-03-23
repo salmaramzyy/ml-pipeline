@@ -6,7 +6,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 mlflow.set_tracking_uri("file:./mlruns")
-mlflow.set_experiment("simple-classifier")
 
 data = load_iris()
 X_train, X_test, y_train, y_test = train_test_split(
