@@ -18,14 +18,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Clean mlruns
-        run: rm -rf mlruns
+      - name: Clean old data
+        run: rm -rf mlruns mlflow.db
 
       - name: Train model
         run: python train.py
-
-      - name: Show mlruns structure
-        run: ls -R mlruns
 
       - name: Upload model info
         uses: actions/upload-artifact@v4
@@ -33,11 +30,11 @@ jobs:
           name: model-info
           path: model_info.txt
 
-      - name: Upload MLflow data
+      - name: Upload MLflow DB       
         uses: actions/upload-artifact@v4
         with:
-          name: mlruns
-          path: mlruns   
+          name: mlflow-db
+          path: mlflow.db
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,18 +48,15 @@ jobs:
         with:
           name: model-info
 
-      - name: Download MLflow data
+      - name: Download MLflow DB     # ✅ downloads mlflow.db directly to cwd
         uses: actions/download-artifact@v4
         with:
-          name: mlruns
-          path: mlruns 
+          name: mlflow-db
 
       - name: Debug files
         run: |
-          echo "Model Info:"
-          cat model_info.txt
-          echo "MLruns structure:"
-          ls -R mlruns
+          echo "Run ID: $(cat model_info.txt)"
+          ls -lh mlflow.db
 
       - uses: actions/setup-python@v5
         with:

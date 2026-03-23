@@ -2,7 +2,7 @@ import mlflow
 import sys
 import os
 
-mlflow.set_tracking_uri("file://" + os.path.abspath("mlruns"))
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
 THRESHOLD = 0.85
 
